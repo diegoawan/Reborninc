@@ -1,10 +1,14 @@
 local RS = game:GetService("ReplicatedStorage")
+local Gameplay = RS:WaitForChild("Remotes"):WaitForChild("Gameplay")
 
+-- Tabs
 local Tab1 = Window:CreateTab("Main", 4483362458)
+task.wait(0.1)
 local Tab2 = Window:CreateTab("Runes", 4483362458)
+task.wait(0.1)
 local Tab3 = Window:CreateTab("Upgrades", 4483362458)
-local Tab4 = Window:CreateTab("Tab 4", 4483362458)
-local Tab5 = Window:CreateTab("Tab 5", 4483362458)
+
+-- ================= MAIN =================
 
 local AutoTier = false
 Tab1:CreateToggle({
@@ -12,16 +16,18 @@ Tab1:CreateToggle({
     CurrentValue = false,
     Callback = function(Value)
         AutoTier = Value
-        if AutoTier then
+        if Value then
             task.spawn(function()
                 while AutoTier do
-                    RS:WaitForChild("Remotes"):WaitForChild("Gameplay"):WaitForChild("TierUp"):FireServer()
-                    task.wait()
+                    Gameplay.TierUp:FireServer()
+                    task.wait(0.2)
                 end
             end)
         end
     end
 })
+
+task.wait(0.05)
 
 local AutoReborn = false
 Tab1:CreateToggle({
@@ -29,16 +35,18 @@ Tab1:CreateToggle({
     CurrentValue = false,
     Callback = function(Value)
         AutoReborn = Value
-        if AutoReborn then
+        if Value then
             task.spawn(function()
                 while AutoReborn do
-                    RS:WaitForChild("Remotes"):WaitForChild("Gameplay"):WaitForChild("Reborn"):FireServer("RebornHitbox1")
-                    task.wait()
+                    Gameplay.Reborn:FireServer("RebornHitbox1")
+                    task.wait(0.3)
                 end
             end)
         end
     end
 })
+
+task.wait(0.05)
 
 local AutoBubbles = false
 Tab1:CreateToggle({
@@ -46,15 +54,14 @@ Tab1:CreateToggle({
     CurrentValue = false,
     Callback = function(Value)
         AutoBubbles = Value
-        if AutoBubbles then
+        if Value then
             task.spawn(function()
                 while AutoBubbles do
-                    local args = {
+                    Gameplay.CollectBubble:FireServer(
                         "Dark Matter",
-                        Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-                    }
-                    RS:WaitForChild("Remotes"):WaitForChild("Gameplay"):WaitForChild("CollectBubble"):FireServer(unpack(args))
-                    task.wait()
+                        Vector3.new(-30.3920, 8.8885, 10577.9658)
+                    )
+                    task.wait(0.1)
                 end
             end)
         end
@@ -63,85 +70,108 @@ Tab1:CreateToggle({
 
 Tab1:CreateLabel("Must be in bubble area to work")
 
+-- ================= RUNES =================
+
+local RuneStates = {}
+
 local function FastRuneToggle(name)
-    local toggled = false
+    RuneStates[name] = false
+
     Tab2:CreateToggle({
         Name = "Auto " .. name,
         CurrentValue = false,
         Callback = function(Value)
-            toggled = Value
-            if toggled then
+            RuneStates[name] = Value
+            if Value then
                 task.spawn(function()
-                    while toggled do
-                        RS:WaitForChild("Remotes"):WaitForChild("Gameplay"):WaitForChild("RuneOpen"):FireServer(name)
-                        task.wait()
+                    while RuneStates[name] do
+                        Gameplay.RuneOpen:FireServer(name)
+                        task.wait(0.1)
                     end
                 end)
             end
         end
     })
+
+    task.wait(0.05) -- prevents UI skipping
 end
 
-FastRuneToggle("Energy")
-FastRuneToggle("Flux")
-FastRuneToggle("Essence")
-FastRuneToggle("Voltage")
-FastRuneToggle("10K Event")
-FastRuneToggle("Bubbles")
-FastRuneToggle("Water")
-FastRuneToggle("Depth")
-FastRuneToggle("Ice")
-FastRuneToggle("Fish")
+local Runes = {
+    "Energy","Flux","Essence","Voltage",
+    "10K Event","Bubbles","Water",
+    "Depth","Ice","Fish"
+}
+
+for _, rune in ipairs(Runes) do
+    FastRuneToggle(rune)
+end
+
+-- ================= UPGRADES =================
+
+local UpgradeStates = {}
 
 local function VoltageUpgradeToggle(name)
-    local toggled = false
+    UpgradeStates[name] = false
+
     Tab3:CreateToggle({
         Name = "Auto " .. name,
         CurrentValue = false,
         Callback = function(Value)
-            toggled = Value
-            if toggled then
+            UpgradeStates[name] = Value
+            if Value then
                 task.spawn(function()
-                    while toggled do
-                        RS:WaitForChild("Remotes"):WaitForChild("Gameplay"):WaitForChild("VoltageUpgrade"):FireServer(name)
-                        task.wait()
+                    while UpgradeStates[name] do
+                        Gameplay.VoltageUpgrade:FireServer(name)
+                        task.wait(0.2)
                     end
                 end)
             end
         end
     })
+
+    task.wait(0.05)
 end
 
 VoltageUpgradeToggle("MoreVoltage")
 VoltageUpgradeToggle("FasterGain")
 
-local function CreateUpgradeToggle(upgradeType, maxLevel)
-    local enabled = false
+-- General upgrades
+local function CreateUpgradeToggle(typeName, maxLevel)
+    UpgradeStates[typeName] = false
+
     Tab3:CreateToggle({
-        Name = "Auto " .. upgradeType .. " Upgrades",
+        Name = "Auto " .. typeName,
         CurrentValue = false,
         Callback = function(Value)
-            enabled = Value
-            if enabled then
+            UpgradeStates[typeName] = Value
+            if Value then
                 task.spawn(function()
-                    while enabled do
+                    while UpgradeStates[typeName] do
                         for level = 1, maxLevel do
-                            RS:WaitForChild("Remotes"):WaitForChild("Gameplay"):WaitForChild("Upgrade"):FireServer(upgradeType, level, true)
+                            Gameplay.Upgrade:FireServer(typeName, level, true)
                             task.wait(0.1)
                         end
-                        task.wait()
+                        task.wait(0.2)
                     end
                 end)
             end
         end
     })
+
+    task.wait(0.05)
 end
 
-CreateUpgradeToggle("Energy", 5)
-CreateUpgradeToggle("Flux", 5)
-CreateUpgradeToggle("Infinitum", 5)
-CreateUpgradeToggle("Aetherum", 5)
-CreateUpgradeToggle("Bubbles", 6)
-CreateUpgradeToggle("Water", 6)
-CreateUpgradeToggle("Ice", 8)
-CreateUpgradeToggle("Fish", 8)
+local Upgrades = {
+    {"Energy",5},
+    {"Flux",5},
+    {"Infinitum",5},
+    {"Aetherum",5},
+    {"Bubbles",6},
+    {"Water",6},
+    {"Ice",8},
+    {"Fish",8}
+}
+
+for _, upg in ipairs(Upgrades) do
+    CreateUpgradeToggle(upg[1], upg[2])
+end
