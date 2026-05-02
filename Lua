@@ -1,14 +1,22 @@
 local RS = game:GetService("ReplicatedStorage")
 local Gameplay = RS:WaitForChild("Remotes"):WaitForChild("Gameplay")
 
-local Tab1 = Window:CreateTab("Main", 4483362458)
-task.wait(0.05)
-local Tab2 = Window:CreateTab("Runes", 4483362458)
-task.wait(0.05)
-local Tab3 = Window:CreateTab("Upgrades", 4483362458)
+local Tabs = {}
+
+local function SafeTab(name)
+    local tab = Window:CreateTab(name, 4483362458)
+    task.wait(0.15)
+    return tab
+end
+
+Tabs.Main = SafeTab("Main")
+Tabs.Runes = SafeTab("Runes")
+Tabs.Upgrades = SafeTab("Upgrades")
+
+task.wait(0.2)
 
 local AutoTier = false
-Tab1:CreateToggle({
+Tabs.Main:CreateToggle({
     Name = "Auto Tier",
     CurrentValue = false,
     Callback = function(v)
@@ -24,10 +32,10 @@ Tab1:CreateToggle({
     end
 })
 
-task.wait(0.02)
+task.wait(0.05)
 
 local AutoReborn = false
-Tab1:CreateToggle({
+Tabs.Main:CreateToggle({
     Name = "Auto Reborn",
     CurrentValue = false,
     Callback = function(v)
@@ -43,10 +51,10 @@ Tab1:CreateToggle({
     end
 })
 
-task.wait(0.02)
+task.wait(0.05)
 
 local AutoBubbles = false
-Tab1:CreateToggle({
+Tabs.Main:CreateToggle({
     Name = "Auto Bubbles (OP)",
     CurrentValue = false,
     Callback = function(v)
@@ -62,13 +70,13 @@ Tab1:CreateToggle({
     end
 })
 
-Tab1:CreateLabel("Must be in bubble area to work")
+Tabs.Main:CreateLabel("Must be in bubble area to work")
 
 local RuneStates = {}
 
-local function FastRuneToggle(name)
+local function RuneToggle(name)
     RuneStates[name] = false
-    Tab2:CreateToggle({
+    Tabs.Runes:CreateToggle({
         Name = "Auto " .. name,
         CurrentValue = false,
         Callback = function(v)
@@ -83,18 +91,18 @@ local function FastRuneToggle(name)
             end
         end
     })
-    task.wait(0.02)
+    task.wait(0.03)
 end
 
 for _,r in ipairs({"Energy","Flux","Essence","Voltage","10K Event","Bubbles","Water","Depth","Ice","Fish"}) do
-    FastRuneToggle(r)
+    RuneToggle(r)
 end
 
 local UpgradeStates = {}
 
-local function VoltageUpgradeToggle(name)
+local function VoltageToggle(name)
     UpgradeStates[name] = false
-    Tab3:CreateToggle({
+    Tabs.Upgrades:CreateToggle({
         Name = "Auto " .. name,
         CurrentValue = false,
         Callback = function(v)
@@ -109,15 +117,15 @@ local function VoltageUpgradeToggle(name)
             end
         end
     })
-    task.wait(0.02)
+    task.wait(0.03)
 end
 
-VoltageUpgradeToggle("MoreVoltage")
-VoltageUpgradeToggle("FasterGain")
+VoltageToggle("MoreVoltage")
+VoltageToggle("FasterGain")
 
-local function CreateUpgradeToggle(t, max)
+local function UpgradeToggle(t, max)
     UpgradeStates[t] = false
-    Tab3:CreateToggle({
+    Tabs.Upgrades:CreateToggle({
         Name = "Auto " .. t,
         CurrentValue = false,
         Callback = function(v)
@@ -134,12 +142,12 @@ local function CreateUpgradeToggle(t, max)
             end
         end
     })
-    task.wait(0.02)
+    task.wait(0.03)
 end
 
 for _,u in ipairs({
     {"Energy",5},{"Flux",5},{"Infinitum",5},{"Aetherum",5},
     {"Bubbles",6},{"Water",6},{"Ice",8},{"Fish",8}
 }) do
-    CreateUpgradeToggle(u[1], u[2])
+    UpgradeToggle(u[1], u[2])
 end
