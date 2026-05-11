@@ -1,4 +1,5 @@
 local RS = game:GetService("ReplicatedStorage")
+
 local Gameplay = RS:WaitForChild("Remotes"):WaitForChild("Gameplay")
 
 local Tab1 = Window:CreateTab("Main", 4483362458)
@@ -9,10 +10,11 @@ Tab1:CreateToggle({
 	CurrentValue = false,
 	Callback = function(Value)
 		AutoTier = Value
+
 		if AutoTier then
 			task.spawn(function()
 				while AutoTier do
-					Gameplay.TierUp:FireServer()
+					Gameplay:WaitForChild("TierUp"):FireServer()
 					task.wait()
 				end
 			end)
@@ -26,10 +28,11 @@ Tab1:CreateToggle({
 	CurrentValue = false,
 	Callback = function(Value)
 		AutoReborn = Value
+
 		if AutoReborn then
 			task.spawn(function()
 				while AutoReborn do
-					Gameplay.Reborn:FireServer("RebornHitbox1")
+					Gameplay:WaitForChild("Reborn"):FireServer("RebornHitbox1")
 					task.wait()
 				end
 			end)
@@ -38,7 +41,6 @@ Tab1:CreateToggle({
 })
 
 local AutoBubbles = false
-
 Tab1:CreateToggle({
 	Name = "Auto Bubbles (OP)",
 	CurrentValue = false,
@@ -47,19 +49,17 @@ Tab1:CreateToggle({
 
 		if AutoBubbles then
 			task.spawn(function()
-				local BubbleRemote = Gameplay.CollectBubble
-				local BubblePos = Vector3.new(
-					-30.392044067382812,
-					8.888593673706055,
-					10577.9658203125
-				)
+				local BubbleRemote = Gameplay:WaitForChild("CollectBubble")
 
 				while AutoBubbles do
-					for i = 1, 15 do
-						BubbleRemote:FireServer("Dark Matter", BubblePos)
+					for i = 1, 50 do
+						BubbleRemote:FireServer(
+							"Dark Matter",
+							Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+						)
 					end
 
-					task.wait(0.05)
+					task.wait()
 				end
 			end)
 		end
@@ -67,7 +67,6 @@ Tab1:CreateToggle({
 })
 
 local AutoIce = false
-
 Tab1:CreateToggle({
 	Name = "Auto Ice (OP)",
 	CurrentValue = false,
@@ -76,19 +75,17 @@ Tab1:CreateToggle({
 
 		if AutoIce then
 			task.spawn(function()
-				local IceRemote = Gameplay.CollectIce
-				local IcePos = Vector3.new(
-					33.00492858886719,
-					12.341867446899414,
-					10787.330078125
-				)
+				local IceRemote = Gameplay:WaitForChild("CollectIce")
 
 				while AutoIce do
-					for i = 1, 15 do
-						IceRemote:FireServer("Normal", IcePos)
+					for i = 1, 50 do
+						IceRemote:FireServer(
+							"Normal",
+							Vector3.new(33.00492858886719, 12.341867446899414, 10787.330078125)
+						)
 					end
 
-					task.wait(0.05)
+					task.wait()
 				end
 			end)
 		end
@@ -110,7 +107,7 @@ local function FastRuneToggle(name)
 
 			if toggled then
 				task.spawn(function()
-					local RuneRemote = Gameplay.RuneOpen
+					local RuneRemote = Gameplay:WaitForChild("RuneOpen")
 
 					while toggled do
 						RuneRemote:FireServer(name)
@@ -146,7 +143,7 @@ local function UpgradeToggle(name)
 
 			if toggled then
 				task.spawn(function()
-					local VoltageRemote = Gameplay.VoltageUpgrade
+					local VoltageRemote = Gameplay:WaitForChild("VoltageUpgrade")
 
 					while toggled do
 						VoltageRemote:FireServer(name)
@@ -172,7 +169,7 @@ local function CreateUpgradeToggle(upgradeType, maxLevel)
 
 			if enabled then
 				task.spawn(function()
-					local UpgradeRemote = Gameplay.Upgrade
+					local UpgradeRemote = Gameplay:WaitForChild("Upgrade")
 
 					while enabled do
 						for level = 1, maxLevel do
