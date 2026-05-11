@@ -40,6 +40,7 @@ Tab1:CreateToggle({
 	end
 })
 
+-- 100 explicit calls per loop
 local AutoBubbles = false
 Tab1:CreateToggle({
 	Name = "Auto Bubbles (OP)",
@@ -52,12 +53,417 @@ Tab1:CreateToggle({
 				local BubbleRemote = Gameplay:WaitForChild("CollectBubble")
 
 				while AutoBubbles do
-					for i = 1, 100 do
-						BubbleRemote:FireServer(
-							"Dark Matter",
-							Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-						)
-					end
+					-- 100x start
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 10
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 20
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 30
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 40
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 50
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 60
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 70
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 80
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 90
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					BubbleRemote:FireServer(
+						"Dark Matter",
+						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+					)
+					-- 100
 					task.wait()
 				end
 			end)
@@ -65,6 +471,7 @@ Tab1:CreateToggle({
 	end
 })
 
+-- OP ICE – 100 explicit calls per loop with optimal coordinate
 local AutoIce = false
 Tab1:CreateToggle({
 	Name = "Auto Ice (OP)",
@@ -77,12 +484,417 @@ Tab1:CreateToggle({
 				local IceRemote = Gameplay:WaitForChild("CollectIce")
 
 				while AutoIce do
-					for i = 1, 100 do
-						IceRemote:FireServer(
-							"Normal",
-							Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-						)
-					end
+					-- 100x start
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 10
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 20
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 30
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 40
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 50
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 60
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 70
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 80
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 90
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					IceRemote:FireServer(
+						"Normal",
+						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+					)
+					-- 100
 					task.wait()
 				end
 			end)
