@@ -40,7 +40,6 @@ Tab1:CreateToggle({
 	end
 })
 
--- OP BUBBLES (500 calls per loop)
 local AutoBubbles = false
 Tab1:CreateToggle({
 	Name = "Auto Bubbles (OP)",
@@ -53,7 +52,7 @@ Tab1:CreateToggle({
 				local BubbleRemote = Gameplay:WaitForChild("CollectBubble")
 
 				while AutoBubbles do
-					for i = 1, 500 do
+					for i = 1, 100 do
 						BubbleRemote:FireServer(
 							"Dark Matter",
 							Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
@@ -66,7 +65,6 @@ Tab1:CreateToggle({
 	end
 })
 
--- OP ICE (500 calls per loop with optimal coordinate)
 local AutoIce = false
 Tab1:CreateToggle({
 	Name = "Auto Ice (OP)",
@@ -79,7 +77,7 @@ Tab1:CreateToggle({
 				local IceRemote = Gameplay:WaitForChild("CollectIce")
 
 				while AutoIce do
-					for i = 1, 500 do
+					for i = 1, 100 do
 						IceRemote:FireServer(
 							"Normal",
 							Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
