@@ -1,989 +1,184 @@
 local RS = game:GetService("ReplicatedStorage")
 
-local Gameplay = RS:WaitForChild("Remotes"):WaitForChild("Gameplay")
+local Remotes = RS:WaitForChild("Remotes"):WaitForChild("Gameplay")
+
+local function GetRemote(name)
+	return Remotes:WaitForChild(name)
+end
+
+local Remote = {
+	TierUp = GetRemote("TierUp"),
+	Reborn = GetRemote("Reborn"),
+	FishClick = GetRemote("FishClick"),
+	CollectBubble = GetRemote("CollectBubble"),
+	CollectIce = GetRemote("CollectIce"),
+	RuneOpen = GetRemote("RuneOpen"),
+	VoltageUpgrade = GetRemote("VoltageUpgrade"),
+	Upgrade = GetRemote("Upgrade"),
+}
+
+local function MakeLoop(fn)
+	local active = false
+
+	return function(enabled)
+		active = enabled
+
+		if enabled then
+			task.spawn(function()
+				while active do
+					fn()
+					task.wait()
+				end
+			end)
+		end
+	end
+end
+
+local function MakeMultiLoop(threads, fn)
+	local active = false
+
+	return function(enabled)
+		active = enabled
+
+		if enabled then
+			for _ = 1, threads do
+				task.spawn(function()
+					while active do
+						fn()
+						task.wait()
+					end
+				end)
+			end
+		end
+	end
+end
 
 local Tab1 = Window:CreateTab("Main", 4483362458)
 
-local AutoTier = false
+local tierLoop = MakeLoop(function()
+	Remote.TierUp:FireServer()
+end)
+
 Tab1:CreateToggle({
 	Name = "Auto Tier",
 	CurrentValue = false,
-	Callback = function(Value)
-		AutoTier = Value
-
-		if AutoTier then
-			task.spawn(function()
-				while AutoTier do
-					Gameplay:WaitForChild("TierUp"):FireServer()
-					task.wait()
-				end
-			end)
-		end
-	end
+	Callback = tierLoop,
 })
 
-local AutoReborn = false
+local rebornLoop = MakeLoop(function()
+	Remote.Reborn:FireServer("RebornHitbox1")
+end)
+
 Tab1:CreateToggle({
 	Name = "Auto Reborn",
 	CurrentValue = false,
-	Callback = function(Value)
-		AutoReborn = Value
-
-		if AutoReborn then
-			task.spawn(function()
-				while AutoReborn do
-					Gameplay:WaitForChild("Reborn"):FireServer("RebornHitbox1")
-					task.wait()
-				end
-			end)
-		end
-	end
+	Callback = rebornLoop,
 })
 
--- OP BUBBLES – 100 explicit calls per loop
-local AutoBubbles = false
+local fishLoop = MakeLoop(function()
+	Remote.FishClick:FireServer()
+end)
+
+Tab1:CreateToggle({
+	Name = "Auto Fish",
+	CurrentValue = false,
+	Callback = fishLoop,
+})
+
+local bubbleLoop = MakeMultiLoop(5, function()
+	Remote.CollectBubble:FireServer(
+		"Dark Matter",
+		Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
+	)
+end)
+
 Tab1:CreateToggle({
 	Name = "Auto Bubbles (OP)",
 	CurrentValue = false,
-	Callback = function(Value)
-		AutoBubbles = Value
-
-		if AutoBubbles then
-			task.spawn(function()
-				local BubbleRemote = Gameplay:WaitForChild("CollectBubble")
-
-				while AutoBubbles do
-					-- 100x start
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 10
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 20
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 30
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 40
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 50
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 60
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 70
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 80
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 90
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					BubbleRemote:FireServer(
-						"Dark Matter",
-						Vector3.new(-30.392044067382812, 8.888593673706055, 10577.9658203125)
-					)
-					-- 100
-					task.wait()
-				end
-			end)
-		end
-	end
+	Callback = bubbleLoop,
 })
 
--- OP ICE – 100 explicit calls per loop with optimal coordinate
-local AutoIce = false
+local iceLoop = MakeMultiLoop(5, function()
+	Remote.CollectIce:FireServer(
+		"Normal",
+		Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
+	)
+end)
+
 Tab1:CreateToggle({
 	Name = "Auto Ice (OP)",
 	CurrentValue = false,
-	Callback = function(Value)
-		AutoIce = Value
-
-		if AutoIce then
-			task.spawn(function()
-				local IceRemote = Gameplay:WaitForChild("CollectIce")
-
-				while AutoIce do
-					-- 100x start
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 10
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 20
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 30
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 40
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 50
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 60
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 70
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 80
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 90
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					IceRemote:FireServer(
-						"Normal",
-						Vector3.new(16.370426177978516, 10.271208763122559, 10773.0712890625)
-					)
-					-- 100
-					task.wait()
-				end
-			end)
-		end
-	end
+	Callback = iceLoop,
 })
 
 Tab1:CreateLabel("Must be in bubble/ice area to work")
 
 local Tab2 = Window:CreateTab("Runes", 4483362458)
 
-local function FastRuneToggle(name)
-	local toggled = false
+local function AddRuneToggle(name)
+	local loop = MakeLoop(function()
+		Remote.RuneOpen:FireServer(name)
+	end)
 
 	Tab2:CreateToggle({
 		Name = "Auto " .. name,
 		CurrentValue = false,
-		Callback = function(Value)
-			toggled = Value
-
-			if toggled then
-				task.spawn(function()
-					local RuneRemote = Gameplay:WaitForChild("RuneOpen")
-
-					while toggled do
-						RuneRemote:FireServer(name)
-						task.wait()
-					end
-				end)
-			end
-		end
+		Callback = loop,
 	})
 end
 
-FastRuneToggle("Energy")
-FastRuneToggle("Flux")
-FastRuneToggle("Essence")
-FastRuneToggle("Voltage")
-FastRuneToggle("10K Event")
-FastRuneToggle("Bubbles")
-FastRuneToggle("Water")
-FastRuneToggle("Depth")
-FastRuneToggle("Ice")
-FastRuneToggle("Fish")
+local RUNES = {
+	"Energy",
+	"Flux",
+	"Essence",
+	"Voltage",
+	"10K Event",
+	"Bubbles",
+	"Water",
+	"Depth",
+	"Ice",
+	"Fish",
+}
+
+for _, rune in ipairs(RUNES) do
+	AddRuneToggle(rune)
+end
 
 local Tab3 = Window:CreateTab("Upgrades", 4483362458)
 
-local function UpgradeToggle(name)
-	local toggled = false
+local function AddVoltageToggle(name)
+	local loop = MakeLoop(function()
+		Remote.VoltageUpgrade:FireServer(name)
+	end)
 
 	Tab3:CreateToggle({
 		Name = "Auto " .. name,
 		CurrentValue = false,
-		Callback = function(Value)
-			toggled = Value
-
-			if toggled then
-				task.spawn(function()
-					local VoltageRemote = Gameplay:WaitForChild("VoltageUpgrade")
-
-					while toggled do
-						VoltageRemote:FireServer(name)
-						task.wait()
-					end
-				end)
-			end
-		end
+		Callback = loop,
 	})
 end
 
-UpgradeToggle("MoreVoltage")
-UpgradeToggle("FasterGain")
+AddVoltageToggle("MoreVoltage")
+AddVoltageToggle("FasterGain")
 
-local function CreateUpgradeToggle(upgradeType, maxLevel)
-	local enabled = false
+local function AddUpgradeToggle(upgradeType, maxLevel)
+	local active = false
 
 	Tab3:CreateToggle({
 		Name = "Auto " .. upgradeType .. " Upgrades",
 		CurrentValue = false,
-		Callback = function(Value)
-			enabled = Value
+		Callback = function(enabled)
+			active = enabled
 
 			if enabled then
 				task.spawn(function()
-					local UpgradeRemote = Gameplay:WaitForChild("Upgrade")
-
-					while enabled do
+					while active do
 						for level = 1, maxLevel do
-							UpgradeRemote:FireServer(upgradeType, level, true)
+							if not active then
+								break
+							end
+
+							Remote.Upgrade:FireServer(upgradeType, level, true)
 							task.wait(0.1)
 						end
 
@@ -991,18 +186,24 @@ local function CreateUpgradeToggle(upgradeType, maxLevel)
 					end
 				end)
 			end
-		end
+		end,
 	})
 end
 
-CreateUpgradeToggle("Energy", 5)
-CreateUpgradeToggle("Flux", 5)
-CreateUpgradeToggle("Infinitum", 5)
-CreateUpgradeToggle("Aetherum", 5)
-CreateUpgradeToggle("Bubbles", 6)
-CreateUpgradeToggle("Water", 6)
-CreateUpgradeToggle("Ice", 8)
-CreateUpgradeToggle("Fish", 8)
+local UPGRADES = {
+	{"Energy", 5},
+	{"Flux", 5},
+	{"Infinitum", 5},
+	{"Aetherum", 5},
+	{"Bubbles", 6},
+	{"Water", 6},
+	{"Ice", 8},
+	{"Fish", 8},
+}
+
+for _, u in ipairs(UPGRADES) do
+	AddUpgradeToggle(u[1], u[2])
+end
 
 local Tab4 = Window:CreateTab("Tab 4", 4483362458)
 local Tab5 = Window:CreateTab("Tab 5", 4483362458)
